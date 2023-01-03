@@ -8,7 +8,7 @@ public:
           string s;
           for(int j = 0; j < sz(strs); j++) 
             s += strs[j][i]; // get the column
-          if(!is_sorted(all(s))) cnt++; // check if the column is sorted
+          if(!is_sorted(all(s))) cnt++; // check if the column is not sorted
         }
         return cnt;
     }
