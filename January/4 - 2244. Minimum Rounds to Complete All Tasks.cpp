@@ -17,3 +17,20 @@ public:
         return curr == 1 ? -1 : ans + ceill(curr, 3);
     }
 };
+
+
+// other solution
+#define ceill(n, m) (((n) / (m)) + ((n) % (m) ? 1 : 0))
+class Solution {
+public:
+    int minimumRounds(vector<int>& tasks) {
+       int ans = 0; 
+       map < int , int > freq;
+       for (auto & i: tasks) freq[i]++; 
+       for (auto & i: freq){
+           if (i.second == 1) return -1;
+           ans += ceill(i.second, 3);
+       }
+       return ans;
+    }
+};
