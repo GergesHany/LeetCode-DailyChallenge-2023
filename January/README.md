@@ -249,8 +249,6 @@ public:
 };
 ```
 
-hr>
-
 <br><br>
 
 ## 7)  [Gas Station](https://leetcode.com/problems/gas-station/)
