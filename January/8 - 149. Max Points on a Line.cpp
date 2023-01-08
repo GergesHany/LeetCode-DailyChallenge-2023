@@ -1,4 +1,4 @@
-// number of points that lie on the same straight line "equal" to the number of points that have the same slope
+// number of points that line on the same straight line "equal" to the number of points that have the same slope
 class Solution {
 public: 
     // get slope between two points
