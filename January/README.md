@@ -326,7 +326,7 @@ public:
 
 <br><br>
 
-## 9)  [ Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+## 9)  [Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 
 ### Difficulty
 
@@ -334,7 +334,8 @@ public:
 
 ### Related Topic
 
-`stack` `Tree` `Depth-First-Search` `Binary-Tree`
+`Stack` `Tree` `Depth-First Search` `Binary Tree`
+
 
 
 ### Code
@@ -351,7 +352,6 @@ struct TreeNode {
 
 class Solution {
 public:
-   
    vector < int > ans;
    // preorder function 
    void preorder(TreeNode* root){
@@ -368,8 +368,6 @@ public:
       return ans;
     }
 };
-
-// implementation of the binary search tree (https://github.com/GergesHany/Data_Structure/blob/master/binary%20search%20tree/BST.cpp)
-
 ```
+[implementation of the binary search tree](https://github.com/GergesHany/Data_Structure/blob/master/binary%20search%20tree/BST.cpp)
 
