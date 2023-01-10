@@ -7,26 +7,14 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution {
-public:    
-    // push back in the vector the value of the node
-    void build(vector < int >& vec, TreeNode* p){
-      if (!p) {
-        // if the node is null push back 0
-        vec.push_back(0);
-        return;
-      }
-      // push back the value of the node
-      vec.push_back(p->val);
-      // call the function for the left and right child
-      build(vec, p -> right);
-      build(vec, p -> left);
-    }
 
+class Solution {
+public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-      vector < int > vec1, vec2;
-      build(vec1, p); 
-      build(vec2, q);
-      return vec1 == vec2;
+      if (!p && !q) return true; // if both are null return true
+      else if (!p or !q) return false; // if one of them is null and the other is not return false
+      if (p -> val != q -> val) return false; // if the values are not equal return false
+      // if the values are equal check the left and right subtrees
+      return isSameTree(p -> right, q -> right) && isSameTree(p -> left, q -> left);
     }
 };
