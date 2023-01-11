@@ -14,6 +14,7 @@
 1. **[Max Points on Line](#8--max-points-on-a-line)**
 1. **[Binary Tree Preorder Traversal](#9--binary-tree-preorder-traversal)**
 1. **[Same Tree](#10--Same-Tree)**
+1. **[Minimum Time to Collect All Apples in a Tree](#11--minimum-time-to-collect-all-apples-in-a-tree)**
 
 <hr>
 
@@ -406,6 +407,49 @@ public:
       if (p -> val != q -> val) return false; // if the values are not equal return false
       // if the values are equal check the left and right subtrees
       return isSameTree(p -> right, q -> right) && isSameTree(p -> left, q -> left);
+    }
+};
+```
+
+hr>
+
+<br><br>
+
+## 11)  [Minimum Time to Collect All Apples in a Tree](https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Tree` `Breadth-First Search` `Depth-First Search` `Hash Table`
+
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int dfs(int u, vector<vector<int>> &adj, vector<bool> &vis, vector<bool> &hasApple) {
+        vis[u] = true; // mark the node as visited
+        int ans = 0; 
+        for(auto &v : adj[u]) {
+            if(!vis[v]) { // if the node is not visited
+                int x = dfs(v, adj, vis, hasApple); // call dfs on the node and store the result in x 
+                if(x || hasApple[v]) ans += 2 + x; // if x or hasApple[v] is true then add 2 + x to the answer
+            }
+        }
+        return ans;
+    } 
+
+    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+         vector < bool > vis(n); 
+         vector < vector < int > > adj(n);
+          for(auto &e : edges) 
+            adj[e[0]].push_back(e[1]), adj[e[1]].push_back(e[0]);            
+          return dfs(0, adj, vis, hasApple);
     }
 };
 ```
