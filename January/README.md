@@ -15,6 +15,9 @@
 1. **[Binary Tree Preorder Traversal](#9--binary-tree-preorder-traversal)**
 1. **[Same Tree](#10--Same-Tree)**
 1. **[Minimum Time to Collect All Apples in a Tree](#11--minimum-time-to-collect-all-apples-in-a-tree)**
+1. **[Number of Nodes in the Sub-Tree With the Same Label](#12--number-of-nodes-in-the-sub-tree-with-the-same-label)**
+1. **[Longest Path With Different Adjacent Characters](#13--longest-path-with-different-adjacent-characters)**
+1. **[Lexicographically Smallest Equivalent String](#14--lexicographically-smallest-equivalent-string)**
 
 <hr>
 
@@ -448,6 +451,112 @@ public:
           for(auto &e : edges) 
             adj[e[0]].push_back(e[1]), adj[e[1]].push_back(e[0]);            
           return dfs(0, adj, vis, hasApple);
+    }
+};
+```
+
+## 12)  [Number of Nodes in the Sub-Tree With the Same Label](https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Tree` `Breadth-First Search` `Depth-First Search` `Hash Table` `Counting`
+
+
+### Code
+
+```cpp
+ // 
+```
+
+<hr>
+
+<br><br>
+
+## 13)  [Longest Path With Different Adjacent Characters](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Array` `String` `Tree` `Depth-First Search` `Graph` `Topological Sort`
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int dfs(vector<vector<int>>& x,int& mx,int i,string& s){
+        if(x[i].size() == 0) return 1; // leaf
+        vector < int > e; // edges
+        int mx1 = 0, mx2 = 0; 
+        for(int j = 0; j < x[i].size(); j++){
+            int a = dfs(x, mx, x[i][j], s); // a = longest path from x[i][j]
+            if(s[x[i][j]] == s[i]) a = 0; // if same color, reset
+            if(a > mx1) 
+                mx2 = mx1, mx1 = a; // mx1 = longest path, mx2 = second longest path
+            else if(a > mx2) mx2 = a; // mx2 = second longest path
+        }
+        mx = max(mx, mx1 + mx2 + 1); // update answer
+        return mx1 + 1;
+    }
+
+    int longestPath(vector<int>& par, string s) {
+        int n = par.size(), mx = 1;
+        vector < vector < int > > x(n, vector<int>());
+        for(int i = 0; i < n; i++)
+            if(~par[i]) x[par[i]].push_back(i); // build tree
+        dfs(x, mx, 0, s); // call dfs
+        return mx;
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 14)  [Lexicographically Smallest Equivalent String](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`String` `Union Find`
+
+### Code
+```cpp
+#define sz(a) int((a).size())
+#define all(a) (a).begin(), (a).end()
+class Solution {
+public:
+    string smallestEquivalentString(string s1, string s2, string baseStr) {
+        vector < char > build(26); 
+        iota(all(build), 'a'); // store the letters in the vector build
+        for(int i = 0; i < sz(s1); i++){
+           // find the max and min of the two letters
+           char maxi = max(build[s1[i] - 'a'], build[s2[i]- 'a']);
+           char mini = min(build[s1[i] - 'a'], build[s2[i] - 'a']);
+           
+           // if the max and min are the same, then continue because they are already equivalent
+           if (maxi == mini) continue;
+
+           // if the max and min are different, then change all the max to min
+           for(int i = 0; i < 26; i++)
+               if(build[i] == maxi)  
+                   build[i] = mini;
+        }
+        // change the baseStr to the smallest equivalent string
+        for(auto& i : baseStr) i = build[i - 'a']; 
+        return baseStr;
     }
 };
 ```
