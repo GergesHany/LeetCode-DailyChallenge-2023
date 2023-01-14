@@ -543,7 +543,7 @@ public:
         iota(all(build), 'a'); // store the letters in the vector build
         for(int i = 0; i < sz(s1); i++){
            // find the max and min of the two letters
-           char maxi = max(build[s1[i] - 'a'], build[s2[i]- 'a']);
+           char maxi = max(build[s1[i] - 'a'], build[s2[i] - 'a']);
            char mini = min(build[s1[i] - 'a'], build[s2[i] - 'a']);
            
            // if the max and min are the same, then continue because they are already equivalent
