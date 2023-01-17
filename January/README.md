@@ -18,6 +18,8 @@
 1. **[Number of Nodes in the Sub-Tree With the Same Label](#12--number-of-nodes-in-the-sub-tree-with-the-same-label)**
 1. **[Longest Path With Different Adjacent Characters](#13--longest-path-with-different-adjacent-characters)**
 1. **[Lexicographically Smallest Equivalent String](#14--lexicographically-smallest-equivalent-string)**
+1. **[Number of Good Paths](#15--number-of-good-paths)**
+1. **[Insert Interval](#16--insert-interval)**
 
 <hr>
 
@@ -557,6 +559,61 @@ public:
         // change the baseStr to the smallest equivalent string
         for(auto& i : baseStr) i = build[i - 'a']; 
         return baseStr;
+    }
+};
+```
+## 15)  [Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Array` `Union Find` `Tree` `Graph`
+
+### Code
+
+```cpp
+//
+```
+
+<br><br>
+
+## 16)  [Insert Interval](https://leetcode.com/problems/insert-interval/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Array`
+
+### Code
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector < vector < int > > ans;
+        
+        for(auto &i: intervals){
+            // if the current interval is less than the new interval then push it to the answer
+            if(i[1] < newInterval[0]) ans.push_back(i);
+            // if the current interval is greater than the new interval then push the new interval to the answer and then push the current interval
+            else if(newInterval[1] < i[0]){
+                ans.push_back(newInterval);
+                newInterval = i;
+            }   
+            else{
+                // if the current interval is overlapping with the new interval then merge them and update the new interval
+                newInterval[0] = min(newInterval[0], i[0]);
+                newInterval[1] = max(newInterval[1], i[1]);
+            }    
+        }
+        ans.push_back(newInterval);
+        return ans;
     }
 };
 ```
