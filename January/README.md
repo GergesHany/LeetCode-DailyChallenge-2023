@@ -21,6 +21,7 @@
 1. **[Number of Good Paths](#15--number-of-good-paths)**
 1. **[Insert Interval](#16--insert-interval)**
 1. **[Flip String to Monotone Increasing](#17--flip-string-to-monotone-increasing)**
+1. **[Maximum Sum Circular Subarray](#18--maximum-sum-circular-subarray)**
 
 <hr>
 
@@ -651,6 +652,40 @@ public:
       }
 
       return min(dp[n - 1][0], dp[n - 1][1]); // return min cost of flipping 0 to 1 or 1 to 0
+    }
+};
+```
+
+<br><br>
+
+## 18)  [Maximum Sum Circular Subarray](https://leetcode.com/problems/maximum-sum-circular-subarray/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`String` `Dynamic Programming`
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& nums) {
+        // Kadane's Algorithm
+        int totalSum = 0, maxSum = INT_MIN, curMax = 0, minSum = INT_MAX, curMin = 0;
+        for (int x : nums) {
+            curMax = max(x, curMax + x);  // max sum of the subarray
+            maxSum = max(maxSum, curMax); // update the max sum of the subarray
+            curMin = min(x, curMin + x);  // min sum of the subarray
+            minSum = min(minSum, curMin); // update the min sum of the subarray
+            totalSum += x; // sum of the array
+        }
+        // if the max sum of the subarray is greater than 0 then we can subtract the min sum of the subarray from the total sum of the array to get a max circular subarray
+        // else we can't subtract the min sum of the subarray from the total sum of the array
+        return maxSum > 0 ? max(maxSum, totalSum - minSum) : maxSum;
     }
 };
 ```
