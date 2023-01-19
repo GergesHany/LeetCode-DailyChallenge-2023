@@ -22,6 +22,8 @@
 1. **[Insert Interval](#16--insert-interval)**
 1. **[Flip String to Monotone Increasing](#17--flip-string-to-monotone-increasing)**
 1. **[Maximum Sum Circular Subarray](#18--maximum-sum-circular-subarray)**
+1. **[Maximum Sum Circular Subarray](#19--Subarray-Sums-Divisible-by-K)**
+
 
 <hr>
 
@@ -686,6 +688,47 @@ public:
         // if the max sum of the subarray is greater than 0 then we can subtract the min sum of the subarray from the total sum of the array to get a max circular subarray
         // else we can't subtract the min sum of the subarray from the total sum of the array
         return maxSum > 0 ? max(maxSum, totalSum - minSum) : maxSum;
+    }
+};
+```
+
+<br><br>
+
+## 19)  [Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`String` `prefix sum` `Hash Table`
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        
+        int cumSum = 0; // sum of the subarray
+        int n = nums.size(); 
+        vector < int > mod(k, 0); // build the mod of the sum of the subarray
+
+        for (int i = 0; i < n; i++) {
+            cumSum += nums[i]; // sum of the subarray
+            mod[((cumSum % k) + k) % k]++; // mod of the sum of the subarray 
+        }
+
+        int ans = 0; 
+        for (int i = 0; i < k; i++)
+        // if the mod of the sum of the subarray is greater than 1
+        // then we can subtract the two subarrays to get a subarray with sum = 0
+            if (mod[i] > 1) 
+                ans += (mod[i] * (mod[i] - 1)) / 2;
+
+
+        return ans + mod[0]; // add the subarrays with sum = 0
     }
 };
 ```
