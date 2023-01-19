@@ -22,7 +22,7 @@
 1. **[Insert Interval](#16--insert-interval)**
 1. **[Flip String to Monotone Increasing](#17--flip-string-to-monotone-increasing)**
 1. **[Maximum Sum Circular Subarray](#18--maximum-sum-circular-subarray)**
-1. **[Maximum Sum Circular Subarray](#19--Subarray-Sums-Divisible-by-K)**
+1. **[Subarray Sums Divisible by K](#19--Subarray-Sums-Divisible-by-K)**
 
 
 <hr>
