@@ -23,6 +23,7 @@
 1. **[Flip String to Monotone Increasing](#17--flip-string-to-monotone-increasing)**
 1. **[Maximum Sum Circular Subarray](#18--maximum-sum-circular-subarray)**
 1. **[Subarray Sums Divisible by K](#19--Subarray-Sums-Divisible-by-K)**
+1. **[Non-decreasing Subsequences](#20--non-decreasing-subsequences)**
 
 
 <hr>
@@ -729,6 +730,46 @@ public:
 
 
         return ans + mod[0]; // add the subarrays with sum = 0
+    }
+};
+```
+
+<br><br>
+
+## 20)  [non-decreasing-subsequences](https://leetcode.com/problems/non-decreasing-subsequences/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Array` `Hash Table` `Backtracking` `Bit Manipulation`
+
+### Code
+
+```cpp
+class Solution {
+#define all(vec)  vec.begin(),  vec.end()  
+public:
+    set < vector < int > > ans; // to avoid duplicates
+    void Get_all(vector < int >& vec, int Idx, vector < int > build){
+       if (Idx == vec.size()){ // base case
+          if (is_sorted(all(build)) && build.size() > 1)  // check if it's sorted and not empty
+            ans.insert(build); // insert it in the set
+          return;
+       }
+       // recursive case
+       Get_all(vec, Idx + 1, build); // don't take the current element
+       build.push_back(vec[Idx]); // take the current element
+       Get_all(vec, Idx + 1, build); // take the current element
+       build.pop_back(); // backtracking
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        Get_all(nums, 0, {}); // call the function
+        vector < vector < int > > res(all(ans)); // convert the set to vector of vectors
+        return res;
     }
 };
 ```
