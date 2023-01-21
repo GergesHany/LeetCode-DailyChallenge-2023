@@ -24,7 +24,7 @@
 1. **[Maximum Sum Circular Subarray](#18--maximum-sum-circular-subarray)**
 1. **[Subarray Sums Divisible by K](#19--Subarray-Sums-Divisible-by-K)**
 1. **[Non-decreasing Subsequences](#20--non-decreasing-subsequences)**
-
+1. **[Restore-IP-Addresses](#21--Restore-IP-Addresses)**
 
 <hr>
 
@@ -770,6 +770,69 @@ public:
         Get_all(nums, 0, {}); // call the function
         vector < vector < int > > res(all(ans)); // convert the set to vector of vectors
         return res;
+    }
+};
+```
+
+
+## 21)  [Restore-IP-Addresses](https://leetcode.com/problems/restore-ip-addresses/description/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`String` `Backtracking`
+
+### Code
+
+```cpp
+class Solution {
+#define sz(s) int(s.size())
+#define all(s) s.begin(), s.end()
+public:
+    // function to check if the string is valid or not
+    bool is_good(string s){
+      // if the point is not 3 and the first character is equal to . is not valid
+      if (count(all(s), '.') != 3 || s[0] == '.') return false;
+
+      // store the index of the point to check the string between the points
+      vector < int > point;
+      for (int i = 0; i < sz(s); i++) if (s[i] == '.') point.push_back(i);
+      point.push_back(sz(s)); // add the last index of the string to check the last string
+
+      // check the first string 
+      string temp = s.substr(0, point[0]);
+      if (stoll(temp) > 255 || (temp[0] == '0' && sz(temp) > 1)) return false;
+      // check the other strings between the points
+      for (int i = 1; i < sz(point); i++){
+        string temp = s.substr(point[i - 1] + 1, point[i] - point[i - 1] - 1);
+        if (stoll(temp) > 255 || (temp[0] == '0' && sz(temp) > 1)) return false;
+      }
+      return true;
+    }
+
+    vector < string > build;
+    void Backtracking(int Idx, string s){
+        if (Idx == sz(s)) {
+          // if the string is valid push it to the vector
+           if (is_good(s)) build.push_back(s);
+           return;
+        }
+        // if the string is equal to . call the function again to check the next character 
+        if (s[Idx] == '.') Backtracking(Idx + 1, s);
+        else{
+          // if the string is not equal to . add the point and call the function again to check the next character
+           Backtracking(Idx + 1, s);
+           s.insert(Idx, ".");
+           Backtracking(Idx + 2, s);
+        }
+    }
+
+    vector<string> restoreIpAddresses(string s) {
+        Backtracking(0, s); // call the function to check the string
+        return build; // return the answer
     }
 };
 ```
