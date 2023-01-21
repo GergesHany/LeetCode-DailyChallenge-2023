@@ -788,6 +788,7 @@ public:
 ### Code
 
 ```cpp
+
 class Solution {
 #define sz(s) int(s.size())
 #define all(s) s.begin(), s.end()
@@ -796,20 +797,17 @@ public:
     bool is_valid(string s){
       // if the point is not 3 and the first character is equal to . is not valid
       if (count(all(s), '.') != 3 || s[0] == '.') return false;
-
-      // store the index of the point to check the string between the points
-      vector < int > point;
-      for (int i = 0; i < sz(s); i++) if (s[i] == '.') point.push_back(i);
-      point.push_back(sz(s)); // add the last index of the string to check the last string
-
-      // check the first string 
-      string temp = s.substr(0, point[0]);
-      if (stoll(temp) > 255 || (temp[0] == '0' && sz(temp) > 1)) return false;
-      // check the other strings between the points
-      for (int i = 1; i < sz(point); i++){
-        string temp = s.substr(point[i - 1] + 1, point[i] - point[i - 1] - 1);
-        if (stoll(temp) > 255 || (temp[0] == '0' && sz(temp) > 1)) return false;
-      }
+      s = "." + s;
+      for (int i = 0; i < sz(s); i++){
+         if (s[i] == '.'){ // if the character is equal to . check the string after it
+           string temp; // temp string to check the string after the point
+           for (int j = i + 1; j < sz(s) && s[j] != '.'; j++)
+              temp += s[j]; // add the string to the temp string
+           // if the size of the temp string is greater than 3 or equal to 0 is not valid   
+           if (sz(temp) > 3 || sz(temp) == 0) return false;
+           if (sz(temp) > 1 && temp[0] == '0' || stoi(temp) > 255) return false;
+         }
+      } 
       return true;
     }
 
