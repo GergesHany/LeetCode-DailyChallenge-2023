@@ -793,7 +793,7 @@ class Solution {
 #define all(s) s.begin(), s.end()
 public:
     // function to check if the string is valid or not
-    bool is_good(string s){
+    bool is_valid(string s){
       // if the point is not 3 and the first character is equal to . is not valid
       if (count(all(s), '.') != 3 || s[0] == '.') return false;
 
@@ -817,7 +817,7 @@ public:
     void Backtracking(int Idx, string s){
         if (Idx == sz(s)) {
           // if the string is valid push it to the vector
-           if (is_good(s)) build.push_back(s);
+           if (is_valid(s)) build.push_back(s);
            return;
         }
         // if the string is equal to . call the function again to check the next character 
