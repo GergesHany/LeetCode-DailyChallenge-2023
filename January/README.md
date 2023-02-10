@@ -26,6 +26,15 @@
 1. **[Non-decreasing Subsequences](#20--non-decreasing-subsequences)**
 1. **[Restore-IP-Addresses](#21--Restore-IP-Addresses)**
 1. **[Palindrome-Partitioning](#22--Palindrome-Partitioning)**
+1. **[Find the Town Judge](#23--find-the-town-judge)**
+1. **[Snakes and Ladders](#24--snakes-and-ladders)**
+1. **[Find Closest Node to Given Two Nodes](#25--find-closest-node-to-given-two-nodes)**
+1. **[Cheapest Flights Within K Stops](#26--cheapest-flights-within-k-stops)**
+1. **[Concatenated Words](#27--concatenated-words)**
+1. **[Data Stream as Disjoint Intervals](#28--data-stream-as-disjoint-intervals)**
+1. **[LFU Cache](#29--lfu-cache)**
+1. **[N-th Tribonacci Number](#30--n-th-tribonacci-number)**
+1. **[Best Team With No Conflicts](#31--best-team-with-no-conflicts)**
 
 
 <hr>
@@ -907,5 +916,500 @@ public:
         backtraking(s,  0); // call the backtraking function
         return ans; // return the answer
     }
+};
+```
+
+<br><br>
+
+## 23)  [Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/)
+
+### Difficulty
+
+**${\bf{\color\{green}\{Easy}}}$**
+
+### Related Topic
+
+`Graph` `Hash Table` `Array`
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        vector < int > indegree(n + 1, 0), outdegree(n + 1, 0); // indegree = incomming edges, outdegree = outgoing edges
+        for(auto x: trust){ 
+          // x[1] has incoming edge and x[0] has outgoing edge
+            outdegree[x[0]]++;  // count outgoing edges
+            indegree[x[1]]++;  // count incoming edges
+        }
+        for(int i = 1; i <= n; i++)
+            // if indegree == n - 1 and outdegree == 0 then this is the judge 
+            if(indegree[i] == n - 1 && outdegree[i] == 0) return i;
+        // if no judge found return -1     
+        return -1;
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 24)  [Snakes and Ladders](https://leetcode.com/problems/snakes-and-ladders/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Graph` `Matrix` `Breadth-First Search`
+
+### Code
+```cpp
+class Solution {
+public:
+    int snakesAndLadders(vector<vector<int>> &board) {
+        
+        int lbl = 1; // label of the cell in the board
+        int n = board.size();
+        vector < int > columns(n); // columns of the board
+        vector < pair < int, int > > cells(n * n + 1); // cells of the board
+        iota(columns.begin(), columns.end(), 0); // fill the columns with 0, 1, 2, ..., n - 1
+        
+        // fill the cells of the board
+        for (int row = n - 1; row >= 0; row--) {
+            for (int column : columns) { // columns is reversed for odd rows
+                cells[lbl++] = {row, column}; // label the cell with lbl and store it in cells vector
+            }
+            reverse(columns.begin(), columns.end()); // reverse the columns for the next row
+        }
+
+        vector < int > dist(n * n + 1, -1); // distance of each cell from the start cell
+        dist[1] = 0; // distance of the start cell from itself is 0
+        queue < int > q; // queue for BFS
+        q.push(1); // push the start cell into the queue
+ 
+        // BFS 
+        while (!q.empty()) {
+            int curr = q.front(); // current cell in the queue
+            q.pop(); // pop the current cell from the queue
+
+            // check the next 6 cells from the current cell 
+            for (int next = curr + 1; next <= min(curr + 6, n * n); next++) {
+                auto [row, column] = cells[next]; // get the row and column of the next cell
+                // if the next cell is a snake or ladder, then go to the destination cell of the snake or ladder otherwise go to the next cell
+                int destination = board[row][column] != -1 ? board[row][column] : next; 
+
+                // if the destination cell is not visited yet, then update the distance of the destination cell and push it into the queue
+                if (dist[destination] == -1) {
+                    dist[destination] = dist[curr] + 1; // update the distance of the destination cell
+                    q.push(destination); // push the destination cell into the queue
+                }
+            }
+        }
+        
+        int ans = dist[n * n]; // distance of the last cell from the start cell 
+        return ans; // return the distance of the last cell from the start cell
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 25)  [Find Closest Node to Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Graph` `Breadth-First Search`
+
+### Code
+
+```cpp
+class Solution {
+public:
+
+    vector < int > BFS(int root, vector < int >& edges){
+        int n = edges.size();
+        
+        // save the distance form the root to each node
+        vector < int > dist(n, 1e9);
+
+        // bfs queue
+        queue < int > bfs;
+
+        // add the root to the queue and make it distance is 0
+        bfs.push(root);
+        dist[root] = 0;
+
+        while(!bfs.empty()){
+            int u = bfs.front();
+            bfs.pop();
+
+            // if the node has no outgoing edge
+            if(edges[u] == -1) continue;
+
+            // update the distance for the current node and add it to the queue
+            int v = edges[u];
+            if(dist[v] > dist[u] + 1)
+                dist[v] = dist[u] + 1, bfs.push(v);
+        }
+
+        // return the distances
+        return dist;
+    }
+
+    int closestMeetingNode(vector<int>& edges, int node1, int node2) {
+        int n = edges.size();
+
+        // get distances from node1 and node2 
+        vector < int > dist_a = BFS(node1, edges), dist_b = BFS(node2, edges);
+        
+        // get the min of max distance of all distances
+        int max_dist = 1e9, node = -1;
+        for(int u = 0; u < n; u++){
+            // get max_dist from node1 and node2 to the node u
+            int curr_dist = max(dist_a[u], dist_b[u]);
+
+            // update the minimum distance the answer for each node
+            if(curr_dist < max_dist)
+                max_dist = curr_dist, node = u;
+        }
+
+        // the index of the node that can be reach to the two nodes with minimum distance
+        return node;
+    }
+};
+```
+
+
+<hr>
+
+<br><br>
+
+## 26)  [Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Dynamic Programming` `Depth-First Search` `Breadth-First Search` `Graph` `Heap (Priority Queue)` `Shortest Path`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector < vector < int > > dp(k + 2, vector < int >(n, INT_MAX));
+
+        for (int i = 0; i <= k + 1; i++) 
+            dp[i][src] = 0; 
+
+        for (int i = 1; i <= k + 1; i++) {
+            for (const auto& f : flights) {
+                if (dp[i - 1][f[0]] != INT_MAX) {
+                    dp[i][f[1]] = min(dp[i][f[1]], dp[i - 1][f[0]] + f[2]);
+                }
+            }
+        }
+        return dp[k + 1][dst] == INT_MAX ? -1 : dp[k + 1][dst];
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 27)  [Concatenated Words](https://leetcode.com/problems/concatenated-words/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Dynamic Programming` `Depth-First Search` `Array` `String` `Trie`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        
+        vector < string > res; // answer vector
+        unordered_set < string > words_set; // set of words 
+        for (string word : words) words_set.insert(word); // insert all words in set
+    
+        for (string word : words) {
+            
+            int n = word.size();
+            vector < int > dp(n + 1, 0); // dp[i] = 1 if we can make word[0..i] from words in set
+            dp[0] = 1; // empty string is always in set
+
+            for (int i = 0; i < n; i++) {
+                if (!dp[i]) continue; // if we can't make word[0..i] then we can't make word[0..n]
+                for (int j = i + 1; j <= n; j++)  // try to make word[0..j] from word[0..i] and word[i..j]
+                    // if word[i..j] is in set and we can make word[0..i] then we can make word[0..j]
+                    if (j - i < n && words_set.count(word.substr(i, j - i))) 
+                        dp[j] = 1; // mark word[0..j] as valid
+                
+                // if we can make word[0..n] then we can make word from words in set
+                if (dp[n]) {
+                    res.push_back(word); // add word to answer
+                    break; // no need to check other words
+                }
+            }
+        }
+        return res; // return answer
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 28)  [Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Binary Search` `Design` `Ordered Set`
+
+### Code
+
+
+```cpp
+class SummaryRanges {
+
+#define sz(s) int(s.size())
+#define all(s) s.begin(), s.end()
+
+vector < int > v; 
+unordered_map < int, bool > mp;
+
+public:
+    // add number to the data structure
+    void addNum(int value) {
+        if(!(mp.count(value))) { // if value not exist in the data structure
+          v.insert(upper_bound(all(v), value), value); // insert value in the sorted vector
+          mp[value] = true;  // mark value as exist in the data structure
+        }
+    }
+    
+     vector < vector < int > > getIntervals() {
+        // the answer is the vector of the intervals
+        vector < vector < int > > ans = {{v[0]}};  // the first interval is the first element in the vector
+
+        // loop on the vector and check if the current element is the next element in the last interval
+        for(int i = 1; i < sz(v); i++){
+            if(ans.back().back() + 1 == v[i]) {  // if the current element is the next element in the last interval
+                if(sz(ans.back()) == 2) ans.back().back() = v[i];  // if the last interval has two elements, update the last element
+                else ans.back().push_back(v[i]);  // if the last interval has one element, add the current element to the last interval
+            }
+            // if the current element is not the next element in the last interval
+            else {
+                if(sz(ans.back()) == 1) // if the last interval has one element, add the first element to the last interval
+                  ans.back().emplace_back(ans.back()[0]); // add the first element to the last interval 
+                ans.push_back({v[i]});  // add new interval with the current element
+            }
+        }
+        // if the last interval has one element, add the first element to the last interval
+        if(sz(ans.back()) == 1)
+          // add the first element to the last interval
+           ans.back().emplace_back(ans.back()[0]); 
+
+        return ans; // return the answer
+    }
+};
+```
+
+
+<hr>
+
+<br><br>
+
+## 29)  [LFU Cache](https://leetcode.com/problems/lfu-cache/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Hash Table` `Linked List` `Design` `Doubly-Linked List`
+
+### Code
+
+```cpp
+class LFUCache {
+    int maxSizeCache; // maximum capacity of the cache
+    int size; // current number of elements in the cache
+    int minFreq; // the minimum frequency of elements in the cache
+    unordered_map<int, pair<int, int>> keyNode; // key to {value,freq}
+    unordered_map<int, list<int>::iterator> keylist; // key to list iterator
+    unordered_map<int, list<int>>  freqKeyLt;  // freq to key list
+public:
+    LFUCache(int capacity) {
+        maxSizeCache = capacity; // setting the maximum capacity of the cache
+        size = 0; // initially the size is zero
+    }
+    
+    int get(int key) {
+        // if the key is not in the cache, return -1
+        if(keyNode.count(key) == 0) return -1;
+        
+        // remove the key from its current frequency list
+        freqKeyLt[keyNode[key].second].erase(keylist[key]);
+        
+        // increase the frequency of the key
+        keyNode[key].second++;
+        
+        // add the key to the frequency list with its new frequency
+        freqKeyLt[keyNode[key].second].push_back(key);
+        
+        // update the key's position in the keylist
+        keylist[key]= --freqKeyLt[keyNode[key].second].end();
+        
+        // if the list of minimum frequency is empty, update the minimum frequency
+        if(freqKeyLt[minFreq].size()==0 ) 
+              minFreq++;
+        
+        // return the value associated with the key
+        return keyNode[key].first;
+    }
+    
+   void put(int key, int value) {
+        // if the cache has a maximum capacity of 0, return
+        if(maxSizeCache <= 0) return;
+        
+        // check if the key already exists in the cache
+        int storedValue = get(key);
+        if(~storedValue){
+            // if the key already exists, update its value
+            keyNode[key].first=value;
+            return;
+        }
+        
+        // if the cache is full, remove the least frequently used key
+        if(size >= maxSizeCache){
+            keyNode.erase(freqKeyLt[minFreq].front());
+            keylist.erase(freqKeyLt[minFreq].front());
+            freqKeyLt[minFreq].pop_front();
+            size--;
+        }
+        
+        // add the new key to the cache
+        keyNode[key] = {value, 1};
+        freqKeyLt[1].push_back(key);
+        keylist[key]= --freqKeyLt[1].end();
+        minFreq = 1;
+        size++;
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 30)  [N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/)
+
+### Difficulty
+
+**${\bf{\color\{green}\{Easy}}}$**
+
+### Related Topic
+
+`Dynamic Programming` `Memoization` `Math` 
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int dp[45]; // dp array to store the result of the subproblems
+    int Tribonacci(int n){ 
+      // base case 
+      if (n <= 2) return 0 + (n > 0);
+      // if the result is already computed, return it
+      int &ret = dp[n]; 
+      if (~ret) return ret;
+      // recursive case to compute the result of the subproblems and store it in the dp array 
+      return ret = Tribonacci(n - 1) + Tribonacci(n - 2) + Tribonacci(n - 3);
+    }
+    
+    int tribonacci(int n) {
+         memset(dp, -1, sizeof(dp)); // initialize the dp array with -1
+         return Tribonacci(n); // call the recursive function
+    }
+};
+```
+
+
+<hr>
+
+<br><br>
+
+## 31)  [Best Team With No Conflicts](https://leetcode.com/problems/best-team-with-no-conflicts/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Dynamic Programming` `Array` `Sorting` 
+
+### Code
+
+```cpp
+class Solution {
+#define sz(s) int(s.size()) 
+#define ll long long
+#define all(s) s.begin(), s.end()
+public:
+  ll dp[1005][1005]; // dp[Idx][prve] = max score if we take the idx and the previous idx is prve
+  vector < pair < ll, ll > > build; // build[i] = {age, score}
+  // we will sort the build vector by age and then we will try to take the idx and the previous idx
+  ll get_max(int Idx, ll prve){
+    if(Idx == sz(build) - 1) return 0; // if we reach the end of the vector
+    // if we take the idx and the previous idx is prve
+    ll &ret = dp[Idx][prve]; 
+    if(~ret) return ret;
+    ret = 0; // if we don't take the idx
+    // if the age of the idx is greater than the age of the previous idx then we can take the idx
+    if(build[Idx].second >= build[prve].second) 
+      ret = max(ret, build[Idx].second + get_max(Idx + 1, Idx)); // take the idx
+    ret = max(ret, get_max(Idx + 1, prve)); // don't take the idx
+    return ret; // return the maximum
+  }
+
+  int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+    ll n = sz(scores);
+    build = vector < pair < ll, ll > > (n); // build[i] = {age, score}
+    for(int i = 0; i < n; i++) build[i] = {ages[i], scores[i]}; 
+    sort(all(build)); // sort the build vector by age 
+    build.push_back({-10, -10}); // add a dummy element to the end of the vector
+    memset(dp, -1, sizeof dp); // initialize the dp array with -1
+    return get_max(0, n); // return the maximum score
+  }
 };
 ```
