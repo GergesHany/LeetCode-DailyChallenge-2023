@@ -674,11 +674,11 @@ public:
         char carry = '0';
         int e = 0, f = 0;
         for(int i = 0; i < sz || carry != '0'; i++){
-        e = (i >= s.size() ? 0 : s[i] - '0');
-        f = (i >= t.size() ? 0 : t[i] - '0');
-        int tmp = (carry - '0') + e + f;
-        carry = (tmp / 10) + '0';
-        res.push_back(tmp % 10 + '0');
+          e = (i >= s.size() ? 0 : s[i] - '0');
+          f = (i >= t.size() ? 0 : t[i] - '0');
+          int tmp = (carry - '0') + e + f;
+          carry = (tmp / 10) + '0';
+          res.push_back(tmp % 10 + '0');
         }
         reverse(res.begin(), res.end());
         while(res[0] == '0') res.erase(res.begin());
