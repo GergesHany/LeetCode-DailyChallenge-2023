@@ -20,6 +20,8 @@ LeetCode Daily Challenge Problems for February
 1. **[Maximum Depth of Binary Tree](#16--maximum-depth-of-binary-tree)**
 1. **[Minimum Distance Between BST Nodes](#17--minimum-distance-between-bst-nodes)**
 1. **[Invert Binary Tree](#18--invert-binary-tree)**
+1. **[Binary Tree Zigzag Level Order Traversal](#19--Binary-Tree-Zigzag-Level-Order-Traversal)**
+1. **[Search Insert Position](#20--Search-Insert-Position)**
 
 <hr>
 
@@ -809,6 +811,92 @@ public:
         root->left = right; // swap left and right subtrees
         root->right = left; // swap left and right subtrees
         return root;
+    }
+};
+```
+
+
+## 19)  [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Tree` `Breadth-First Search` `Binary Tree`
+
+### Code
+
+
+```cpp
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+#define sz(s) int(s.size())
+#define all(s) s.begin(), s.end()
+public:
+    // function to do dfs and push the nodes in the vector
+    void dfs(TreeNode* root, int level, vector < vector < int > > &ans){
+      if (!root) return; // if the node is null return
+      if (sz(ans) == level) ans.push_back({}); // if the level is not in the vector push it
+      ans[level].push_back(root->val); // push the node in the vector
+      dfs(root->left, level + 1, ans); // do dfs in the left subtree
+      dfs(root->right, level + 1, ans); // do dfs in the right subtree
+    }
+
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+      vector < vector < int > > ans; // vector to store the answer
+      if (!root) return ans; // if the root is null return the vector
+      dfs(root, 0, ans); // do dfs and push the nodes in the vector
+      // reverse the odd levels in the vector to get the zigzag order
+      for (int i = 1; i < sz(ans); i += 2) 
+        reverse(all(ans[i])); 
+      return ans;  // return the vector 
+    }
+};
+```
+
+
+## 20)  [Search Insert Position](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+### Difficulty
+
+**${\bf{\color\{green}\{Easy}}}$**
+
+### Related Topic
+
+`Array` `Binary search` 
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+      // initalize the index with the size of the vector because if the target is greater than all the elements in the vector then the index will be the size of the vector
+        int Idx = int(nums.size()); 
+        int l = 0, r =  int(nums.size()) - 1; // l = left, r = right
+        // binary search
+        while(l <= r){
+            long long mid = l + (r - l) / 2;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] > target) r = mid - 1;
+            else l = mid + 1, Idx = mid + 1;
+        }  
+        if (nums[0] > target) Idx = 0; // if the target is less than the first element in the vector then the index will be 0
+        return Idx; // return the index
     }
 };
 ```
