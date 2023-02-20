@@ -85,9 +85,9 @@ public:
     bool isAlienSorted(vector<string>& words, string order) {
         int j = 0;
         map < char, int > mp;
-        for( auto &it : order ) mp[it] = j++; // map each char to its index in the order string
+        for(auto &it : order) mp[it] = j++; // map each char to its index in the order string
 
-        for( int i = 1; i < words.size(); i++ ){
+        for(int i = 1; i < words.size(); i++){
 
             bool flag = false; // flag to check if the first string is smaller than the second string  
             string first = words[i - 1]; // first string
