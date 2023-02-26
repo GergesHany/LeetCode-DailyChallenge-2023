@@ -22,6 +22,11 @@ LeetCode Daily Challenge Problems for February
 1. **[Invert Binary Tree](#18--invert-binary-tree)**
 1. **[Binary Tree Zigzag Level Order Traversal](#19--Binary-Tree-Zigzag-Level-Order-Traversal)**
 1. **[Search Insert Position](#20--Search-Insert-Position)**
+1. **[Single Element in a Sorted Array](#21--single-element-in-a-sorted-array)**
+1. **[Capacity To Ship Packages Within D Days](#22--capacity-to-ship-packages-within-d-days)**
+1. **[IPO](#23--ipo)**
+1. **[Minimize Deviation in Array](#24--minimize-deviation-in-array)**
+1. **[Best Time to Buy and Sell Stock](#25--best-time-to-buy-and-sell-stock)**
 
 <hr>
 
@@ -900,3 +905,207 @@ public:
     }
 };
 ```
+
+
+## 21)  [Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
+
+### Difficulty
+
+**${\bf{\color\{green}\{Easy}}}$**
+
+### Related Topic
+
+`Array` `Binary Search`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int ans = 0; // 0 ^ x = x and x ^ x = 0
+        // so we can xor all the elements and the result will be the single element 
+        // because all the other elements will be paired with it 
+        // and the xor of two equal elements will be 0 
+        for (auto x : nums) ans ^= x;  // find the single element
+        return ans; // return the single element
+    }
+};
+```
+<hr>
+
+<br><br>
+
+## 22)  [Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`Array` `Binary Search`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n = weights.size(); // number of weights
+        int l = *max_element(weights.begin(), weights.end()); // min capacity
+        long long r = accumulate(weights.begin(), weights.end(), 0LL); // max capacity
+        // binary search on the answer
+        while(l < r){
+            int sum = 0, cnt = 1; // cnt is the number of days needed
+            long long mid = l + (r - l) / 2; // mid is the capacity of the ship
+            // check if we can ship all the weights in mid days
+            for(int i = 0; i < n; i++){
+                // if the current weight is greater than the capacity of the ship then we can't ship it
+                if(sum + weights[i] > mid){
+                    cnt++, sum = 0; // we need another day to ship the current weight
+                }
+                sum += weights[i]; // add the current weight to the sum
+            }
+            // if the number of days needed is greater than the given days then we need to increase the capacity of the ship
+            if(cnt > days) l = mid + 1;
+            else r = mid; // else we can decrease the capacity of the ship
+        }
+        return l; // return the minimum capacity of the ship
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 23)  [IPO](https://leetcode.com/problems/ipo/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Array` `Greedy` `Sorting` `Heap (Priority Queue)`
+
+### Code
+
+
+```cpp
+class Solution {
+#define all(s)  s.begin(),  s.end()
+public:
+    int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {   
+      int Idx = 0; // index of projects 
+      int n = profits.size(); // number of projects
+      priority_queue< pair < int, int > > pq; // max heap
+      vector < pair < int, int > > projects(n); // pair of capital and profit
+      // store capital and profit in vector of pairs
+      for(int i = 0; i < n; i++)
+        projects[i] = {capital[i], profits[i]}; 
+
+      sort(all(projects)); // sort projects by capital 
+
+      int ans = w; // current capital
+      while(k--){
+        // add all projects that can be done with current capital
+        while(Idx < n && projects[Idx].first <= ans)
+          pq.push({projects[Idx].second, projects[Idx].first}), Idx++;
+        if(pq.empty()) break; // no more projects can be done
+        ans += pq.top().first; // add profit of project with max profit
+        pq.pop(); // remove project with max profit
+      }
+      return ans; // return current capital
+    }
+};
+```
+
+
+<hr>
+
+<br><br>
+
+## 24)  [Minimize Deviation in Array](https://leetcode.com/problems/minimize-deviation-in-array/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Array` `Greedy` `Ordered Set` `Heap (Priority Queue)`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int minimumDeviation(vector<int>& nums) {
+        int Min = INT_MAX;  // min value in the heap
+        priority_queue<int> pq; // max heap 
+        for (int num : nums) {
+            // make all numbers even 
+            if (num & 1)  num *= 2;
+            // insert all numbers in the heap
+            pq.push(num);
+            // update the min value
+            Min = min(Min, num);
+        }
+
+        int ans = 1e9; // the answer
+        while (true) {
+            int maxVal = pq.top(); // the max value in the heap
+            pq.pop(); // remove it
+            ans = min(ans, maxVal - Min); // update the answer
+            if (maxVal & 1) break; // if the max value is odd then break
+            maxVal = maxVal / 2; // make it even
+            Min = min(Min, maxVal); // update the min value
+            pq.push(maxVal); // insert it in the heap
+        }
+        return ans; // return the answer
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
+## 25)  [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+### Difficulty
+
+**${\bf{\color\{green}\{Easy}}}$**
+
+### Related Topic
+
+`Array` `Dynamic Programming`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+      int ans = 0, minn = 1e9; // 1e9 is the maximum value of prices[i]
+      for(int i = 0; i < prices.size(); i++){
+        // minn is the minimum value of prices[i] before prices[i]
+        if(prices[i] < minn){
+          minn = prices[i];
+        }
+        // ans is the maximum value of prices[i] - minn
+        if(prices[i] - minn > ans){
+          ans = prices[i] - minn;
+        }
+      }
+      return ans; // return the maximum value of prices[i] - minn
+    }
+};
+```
+
