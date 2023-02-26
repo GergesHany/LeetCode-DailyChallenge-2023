@@ -27,7 +27,7 @@ LeetCode Daily Challenge Problems for February
 1. **[IPO](#23--ipo)**
 1. **[Minimize Deviation in Array](#24--minimize-deviation-in-array)**
 1. **[Best Time to Buy and Sell Stock](#25--best-time-to-buy-and-sell-stock)**
-1. **[Edit Distance](#Edit-Distance)**
+1. **[Edit Distance](#26--Edit-Distance)**
 
 <hr>
 
