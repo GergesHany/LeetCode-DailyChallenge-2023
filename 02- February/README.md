@@ -1114,7 +1114,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}\{Easy}}}$**
+**${\bf{\color\{red}\{Hard}}}$**
 
 ### Related Topic
 
