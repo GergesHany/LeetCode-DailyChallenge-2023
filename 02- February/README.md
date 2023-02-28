@@ -28,6 +28,8 @@
 1. **[Minimize Deviation in Array](#24--minimize-deviation-in-array)**
 1. **[Best Time to Buy and Sell Stock](#25--best-time-to-buy-and-sell-stock)**
 1. **[Edit Distance](#26--Edit-Distance)**
+1. **[Construct Quad Tree](#27--Construct-Quad-Tree)**
+1. **[Find Duplicate Subtrees](#28--Find-Duplicate-Subtrees)
 
 <hr>
 
@@ -1167,6 +1169,151 @@ public:
         return get_min_cost(0, 0); // return the min cost to convert s to t
     }
 };
+```
+
+
+## 27)  [Construct Quad Tree](https://leetcode.com/problems/construct-quad-tree/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Array` `Tree` `Matrix` `Divide and Conquer`
+
+### Code
+
+
+```cpp
+class Node {
+public:
+    bool val;
+    bool isLeaf;
+    Node* topLeft;
+    Node* topRight;
+    Node* bottomLeft;
+    Node* bottomRight;
+    
+    Node() {
+        val = false;
+        isLeaf = false;
+        topLeft = NULL;
+        topRight = NULL;
+        bottomLeft = NULL;
+        bottomRight = NULL;
+    }
+    
+    Node(bool _val, bool _isLeaf) {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = NULL;
+        topRight = NULL;
+        bottomLeft = NULL;
+        bottomRight = NULL;
+    }
+    
+    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = _topLeft;
+        topRight = _topRight;
+        bottomLeft = _bottomLeft;
+        bottomRight = _bottomRight;
+    }
+};
+
+class Solution {
+public:
+    Node* constructQuadTree(vector<vector<int>>& grid, int rowStart, int rowEnd, int colStart, int colEnd) {
+      // check if the current subgrid is a leaf node
+        if (rowStart > rowEnd || colStart > colEnd) {
+            return nullptr;
+        }
+        
+        // check if the current subgrid is a leaf node
+        bool isLeaf = true;
+        int val = grid[rowStart][colStart];
+        for (int i = rowStart; i <= rowEnd; i++) {
+            for (int j = colStart; j <= colEnd; j++) {
+                if (grid[i][j] != val) {
+                    isLeaf = false;
+                    break;
+                }
+            }
+            if (!isLeaf) {
+                break;
+            }
+        }
+        
+        // if the current subgrid is a leaf node, return a new node with the value
+        if (isLeaf) {
+            return new Node(val, true);
+        }
+        
+        // if the current subgrid is not a leaf node, recursively construct the tree
+        int rowMid = (rowStart + rowEnd) / 2;
+        int colMid = (colStart + colEnd) / 2;
+        Node* topLeft = constructQuadTree(grid, rowStart, rowMid, colStart, colMid);
+        Node* topRight = constructQuadTree(grid, rowStart, rowMid, colMid + 1, colEnd);
+        Node* bottomLeft = constructQuadTree(grid, rowMid + 1, rowEnd, colStart, colMid);
+        Node* bottomRight = constructQuadTree(grid, rowMid + 1, rowEnd, colMid + 1, colEnd);
+        return new Node(false, false, topLeft, topRight, bottomLeft, bottomRight);
+    }
+    Node* construct(vector<vector<int>>& grid) {
+        int n = grid.size();
+        return constructQuadTree(grid, 0, n - 1, 0, n - 1);
+    }
+};
+```
+
+
+## 28)  [ Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Hash Table` `Tree` `Depth-First_Search` `Binry Tree`
+
+### Code
+
+
+```cpp
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        
+        vector < TreeNode* > ans; // answer vector
+        
+        unordered_map < string, int > mp; // map to store the frequency of each subtree
+        // string is the preorder traversal of the subtree
+        function < string(TreeNode*) > dfs = [&](TreeNode* node){
+            if (!node) return string("#"); // if the node is null return # to represent null
+            // return the preorder traversal of the subtree
+            string s = to_string(node->val) + "," + dfs(node->left) + "," + dfs(node->right);
+            if (mp[s] == 1) ans.push_back(node); // if the frequency of the subtree is 1 then it is a duplicate subtree 
+            mp[s]++; // increase the frequency of the subtree
+            return s; // return the preorder traversal of the subtree
+        };
+
+        dfs(root); // call the dfs function
+
+        return ans; // return the answer vector
+    }
+};
 
 ```
+
 
