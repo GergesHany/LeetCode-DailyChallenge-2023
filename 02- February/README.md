@@ -29,7 +29,7 @@
 1. **[Best Time to Buy and Sell Stock](#25--best-time-to-buy-and-sell-stock)**
 1. **[Edit Distance](#26--Edit-Distance)**
 1. **[Construct Quad Tree](#27--Construct-Quad-Tree)**
-1. **[Find Duplicate Subtrees](#28--Find-Duplicate-Subtrees)
+1. **[Find Duplicate Subtrees](#28--Find-Duplicate-Subtrees)**
 
 <hr>
 
