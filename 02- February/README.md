@@ -1176,7 +1176,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{red}\{Hard}}}$**
+**${\bf{\color\{orange}\{Medium}}}$**
 
 ### Related Topic
 
@@ -1268,11 +1268,11 @@ public:
 ```
 
 
-## 28)  [ Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/)
+## 28)  [Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/)
 
 ### Difficulty
 
-**${\bf{\color\{red}\{Hard}}}$**
+**${\bf{\color\{orange}\{Medium}}}$**
 
 ### Related Topic
 
