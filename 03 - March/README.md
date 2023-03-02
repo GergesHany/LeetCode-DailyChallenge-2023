@@ -62,7 +62,7 @@ public:
 <br><br>
 
 
-## 1)  [String Compression](https://leetcode.com/problems/string-compression/description/)
+## 2)  [String Compression](https://leetcode.com/problems/string-compression/description/)
 
 ### Difficulty
 
