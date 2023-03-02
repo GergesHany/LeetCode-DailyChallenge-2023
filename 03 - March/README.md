@@ -3,7 +3,7 @@
 ## Problems:
 
 1. **[Sort an Array](#1--Sort-an-Array)**
-1. **[String Compression](#1--String-Compression)**
+1. **[String Compression](#2--String-Compression)**
 
 
 <hr>
