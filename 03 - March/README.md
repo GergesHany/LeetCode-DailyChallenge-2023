@@ -4,6 +4,8 @@
 
 1. **[Sort an Array](#1--Sort-an-Array)**
 1. **[String Compression](#2--String-Compression)**
+1. **[Find the Index of the First Occurrence in a String](#3--Find-the-Index-of-the-First-Occurrence-in-a-String)**
+
 
 
 <hr>
@@ -113,4 +115,33 @@ public:
 <hr>
 
 <br><br>
+
+
+## 3)  [Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Medium}}}$**
+
+### Related Topic
+
+`String` `Two pointer`
+
+### Code
+
+
+```cpp
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+       int Idx = haystack.find(needle); // find the index of the needle in the haystack
+       return Idx; // return the index
+    }
+};
+```
+
+<hr>
+
+<br><br>
+
 
