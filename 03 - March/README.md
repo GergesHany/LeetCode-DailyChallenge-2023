@@ -125,7 +125,7 @@ public:
 
 ### Related Topic
 
-`String` `Two pointer`
+`String` `Two pointer` `String matching`
 
 ### Code
 
