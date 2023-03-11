@@ -131,7 +131,13 @@ public:
 
 
 ```cpp
-
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+       int Idx =  haystack.find(needle);
+       return Idx;
+    }
+};
 ```
 
 <hr>
