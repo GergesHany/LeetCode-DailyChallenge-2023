@@ -148,7 +148,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{orange}\{Medium}}}$**
+**${\bf{\color\{red}\{Hard}}}$**
 
 ### Related Topic
 
