@@ -5,6 +5,14 @@
 1. **[Sort an Array](#1--Sort-an-Array)**
 1. **[String Compression](#2--String-Compression)**
 1. **[Find the Index of the First Occurrence in a String](#3--Find-the-Index-of-the-First-Occurrence-in-a-String)**
+1. **[Count Subarrays With Fixed Bounds](#4--count-subarrays-with-fixed-bounds)**
+1. **[Jump Game IV](#5--jump-game-iv)**
+1. **[Kth Missing Positive Number](#06--kth-missing-positive-number)**
+1. **[Minimum Time to Complete Trips](#07--minimum-time-to-complete-trips)**
+1. **[Koko Eating Bananas](#08--koko-eating-bananas)**
+1. **[Linked List Cycle II](#09--linked-list-cycle-ii)**
+1. **[Linked List Random Node](#10--linked-list-random-node)**
+1. **[Convert Sorted List to Binary Search Tree](#11--convert-sorted-list-to-binary-search-tree)**
 
 
 
