@@ -13,6 +13,8 @@
 1. **[Linked List Cycle II](#09--linked-list-cycle-ii)**
 1. **[Linked List Random Node](#10--linked-list-random-node)**
 1. **[Convert Sorted List to Binary Search Tree](#11--convert-sorted-list-to-binary-search-tree)**
+1. **[ Merge k Sorted Lists](#12--Merge-k-Sorted-Lists)**
+
 
 
 
@@ -545,4 +547,59 @@ public:
     }
 };
 ```
+
+
+## 12)  [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+
+### Difficulty
+
+**${\bf{\color\{red}\{Hard}}}$**
+
+### Related Topic
+
+`Linked List` `Divide and Conquer` `Heap(priority queue)` `Merge sort`
+
+### Code
+
+
+```cpp
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        vector < int > ans;
+        for(int i = 0; i < lists.size(); i++){
+            ListNode* head = lists[i];
+            while(head != nullptr){
+                ans.push_back(head->val);
+                head = head->next;
+            }
+        }
+        
+        sort(ans.begin(), ans.end(), greater<int>());
+        ListNode *answer = NULL;
+        for (int x: ans){
+            ListNode* temp = new ListNode;
+            temp -> val = x;
+            temp -> next = answer;
+            answer = temp;
+        }
+        return answer;
+    }
+};
+```
+
+
+
+
+
+
+
 
