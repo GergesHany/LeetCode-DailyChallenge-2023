@@ -597,6 +597,64 @@ public:
 ```
 
 
+## 13)  [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
+
+### Difficulty
+
+**${\bf{\color\{orange}\{Madium}}}$**
+
+### Related Topic
+
+`Tree` `Depth-First-search` `Breadth-First-search` `Bainry Tree`
+
+### Code
+
+
+```cpp
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public: 
+    // function to reverse right subtree
+    void reverse(TreeNode* root){
+        if (!root) return;
+        TreeNode* temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        reverse(root->left);
+        reverse(root->right);
+    }
+
+    // function to check if two trees are same
+    bool is_same(TreeNode* root1, TreeNode* root2){
+        if (!root1 && !root2) return true;
+        if (!root1 || !root2) return false;
+        if (root1->val != root2->val) return false;
+        return is_same(root1->left, root2->left) && is_same(root1->right, root2->right);
+    }
+   
+    bool isSymmetric(TreeNode* root) {
+        if (!root) return false; // if root is null
+        // if root is not null
+        // reverse right subtree
+        // check if left subtree and reversed right subtree are same
+        TreeNode* left = root->left;
+        TreeNode* right = root->right;
+        reverse(right);
+        return is_same(left, right);
+    }
+};
+
+```
+
+
 
 
 
