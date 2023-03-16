@@ -712,7 +712,6 @@ public:
 
 ### Code
 
-
 ```cpp
 /**
  * Definition for a binary tree node.
