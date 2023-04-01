@@ -3,7 +3,7 @@ public:
     bool isAlienSorted(vector<string>& words, string order) {
         int j = 0;
         map < char, int > mp;
-        for(auto &it : order ) mp[it] = j++;
+        for(auto &it : order) mp[it] = j++;
 
         for(int i = 1; i < words.size(); i++ ){
 
