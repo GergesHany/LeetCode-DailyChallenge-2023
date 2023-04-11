@@ -929,8 +929,6 @@ public:
     int singleNonDuplicate(vector<int>& nums) {
         int ans = 0; // 0 ^ x = x and x ^ x = 0
         // so we can xor all the elements and the result will be the single element 
-        // because all the other elements will be paired with it 
-        // and the xor of two equal elements will be 0 
         for (auto x : nums) ans ^= x;  // find the single element
         return ans; // return the single element
     }
