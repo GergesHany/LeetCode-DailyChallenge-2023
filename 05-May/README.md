@@ -2,17 +2,14 @@
 
 ## Problems:
 
-1. **[Average Salary Excluding the Minimum and Maximum Salary](#1--Average-Salary-Excluding-the-Minimum-and-Maximum-Salary)**
+## 1. **[Average Salary Excluding the Minimum and Maximum Salary](#1--Average-Salary-Excluding-the-Minimum-and-Maximum-Salary)**
 
-
-
-## 1. [Average Salary Excluding the Minimum and Maximum Salary](https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/)
 
 <hr>
 
 <br><br>
 
-## 1)  [Sort an Array](https://leetcode.com/problems/sort-an-array/description/)
+## 1)  [Average Salary Excluding the Minimum and Maximum Salary](https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/)
 
 ### Difficulty
 
