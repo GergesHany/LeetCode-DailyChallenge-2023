@@ -3,6 +3,7 @@
 ## Problems:
 
 1. **[Average Salary Excluding the Minimum and Maximum Salary](#1--Average-Salary-Excluding-the-Minimum-and-Maximum-Salary)**
+1. **[Sign of the Product of an Array](#2--Sign-of-the-Product-of-an-Array)**
 
 
 <hr>
@@ -17,7 +18,7 @@
 
 ### Related Topic
 
-`String` `Math`
+`sorting` `array`
 
 ### Code
 
@@ -46,3 +47,34 @@ public:
 <hr>
 
 <br><br>
+
+## 2)  [Sign of the Product of an Array](https://leetcode.com/problems/sign-of-the-product-of-an-array/)
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+`Array` `Math`
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int arraySign(vector<int>& nums) {
+       int neg = 0; // count the number of negative numbers
+       for (auto & i: nums){
+           // if there is a zero, return 0 immediately 
+           // because the product will be zero 
+           if (!i) return 0; 
+           // count the number of negative numbers
+           neg += (i < 0);
+       }  
+       // if the number of negative numbers is odd, 
+       // the product will be negative 
+       // otherwise, the product will be positive
+       return (neg & 1 ? -1 : 1);
+    }
+};
+```
