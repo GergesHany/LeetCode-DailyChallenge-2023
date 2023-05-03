@@ -4,6 +4,7 @@
 
 1. **[Average Salary Excluding the Minimum and Maximum Salary](#1--Average-Salary-Excluding-the-Minimum-and-Maximum-Salary)**
 1. **[Sign of the Product of an Array](#2--Sign-of-the-Product-of-an-Array)**
+1. **[Find the Difference of Two Arrays](#3--Find-the-Difference-of-Two-Arrays)**
 
 
 <hr>
@@ -58,7 +59,6 @@ public:
 `Array` `Math`
 
 ### Code
-
 ```cpp
 class Solution {
 public:
@@ -78,3 +78,41 @@ public:
     }
 };
 ```
+<br><hr>
+
+## 3)  [Find the Difference of Two Arrays](https://leetcode.com/problems/find-the-difference-of-two-arrays/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+`Array` `Hash Table`
+
+### Code
+```cpp
+class Solution {
+public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        // map to count the frequency of each element
+        map < int, int > a, b; 
+
+        // count the frequency of each element in nums1 and nums2
+        for (auto & i: nums1) a[i]++;
+        for (auto & i: nums2) b[i]++;
+        
+        vector < int > A, B; // A: elements in nums1 but not in nums2, B: elements in nums2 but not in nums1
+        // find the elements in nums1 but not in nums2
+        for (auto & i: nums1) if (!b[i]) B.push_back(i), b[i] = 1;
+        // find the elements in nums2 but not in nums1
+        for (auto & i: nums2) if (!a[i]) A.push_back(i), a[i] = 1;
+        // the answer is the union of A and B
+        vector < vector < int > > ans = {B, A};
+        // return the answer
+        return ans; 
+    }
+};
+```
+
+
