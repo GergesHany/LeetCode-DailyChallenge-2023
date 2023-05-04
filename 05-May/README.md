@@ -5,6 +5,7 @@
 1. **[Average Salary Excluding the Minimum and Maximum Salary](#1--Average-Salary-Excluding-the-Minimum-and-Maximum-Salary)**
 1. **[Sign of the Product of an Array](#2--Sign-of-the-Product-of-an-Array)**
 1. **[Find the Difference of Two Arrays](#3--Find-the-Difference-of-Two-Arrays)**
+1. **[Dota2 Senate](#4--Dota2-Senate)**
 
 
 <hr>
@@ -114,5 +115,44 @@ public:
     }
 };
 ```
+
+<hr><br>
+
+## 4)  [Dota2 Senate](https://leetcode.com/problems/dota2-senate/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Medium}}}$**
+
+### Related Topic
+
+`String` `Greedy` `Queue`
+
+### Code
+```cpp
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        
+        int score = 0; 
+        for (int i = 0; i < senate.size(); ++i) {
+            const char ch = senate[i];
+            if (ch == 'R') {
+                if (score < 0) 
+                    senate.push_back('D');
+                ++score;
+            } else {
+                if (score > 0) 
+                    senate.push_back('R');
+                --score;
+            }
+        }
+        return (score > 0 ? "Radiant" : "Dire");
+   }
+};
+```
+
+<hr><br>
+
 
 
