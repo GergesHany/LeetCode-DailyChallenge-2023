@@ -6,6 +6,7 @@
 1. **[Sign of the Product of an Array](#2--Sign-of-the-Product-of-an-Array)**
 1. **[Find the Difference of Two Arrays](#3--Find-the-Difference-of-Two-Arrays)**
 1. **[Dota2 Senate](#4--Dota2-Senate)**
+1. **[Maximum Number of Vowels in a Substring of Given Length](#5--Maximum-Number-of-Vowels-in-a-Substring-of-Given-Length)**
 
 
 <hr>
@@ -156,3 +157,39 @@ public:
 
 
 
+## 5)  [Maximum Number of Vowels in a Substring of Given Length](https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Medium}}}$**
+
+### Related Topic
+
+`String` `Sliding Window`
+
+### Code
+```cpp
+class Solution {
+public:
+    int maxVowels(string s, int k) {      
+        string Vowels = "aeiou"; // the string of vowels
+
+        // sliding window technique
+        int ans = 0, l = 0, r = 0, cnt = 0;
+        while(r < k) { 
+            // count the number of vowels in the first window
+            cnt += (Vowels.find(s[r]) != -1);
+            r++;
+        }        
+
+        ans = cnt; // update the answer
+        // sliding the window to the right and update the answer
+        while(r < int(s.size())){
+            cnt += (Vowels.find(s[r++]) != -1);
+            cnt -= (Vowels.find(s[l++]) != -1);
+            ans = max(ans, cnt);
+        }
+        return ans;
+    }
+};
+```
