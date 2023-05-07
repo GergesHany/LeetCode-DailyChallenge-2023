@@ -8,6 +8,7 @@
 1. **[Dota2 Senate](#4--Dota2-Senate)**
 1. **[Maximum Number of Vowels in a Substring of Given Length](#5--Maximum-Number-of-Vowels-in-a-Substring-of-Given-Length)**
 1. **[Number of Subsequences That Satisfy the Given Sum Condition](#6--Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition)**
+1. **[Find the Longest Valid Obstacle Course at Each Position](#7--Find-the-Longest-Valid-Obstacle-Course-at-Each-Position)**
 
 
 <hr>
@@ -239,3 +240,33 @@ public:
     }
 };
 ```
+
+## 7)  [Find the Longest Valid Obstacle Course at Each Position](https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Hard}}}$**
+
+### Related Topic
+
+`Array` `Binary Search` `binary Indexed Tree` 
+
+### Code
+```cpp
+class Solution {
+public:
+    vector<int> longestObstacleCourseAtEachPosition(vector<int>& obstacles) {
+        vector < int > ans; // answer
+        // build[i]: the minimum value of the last element of a subsequence of length i
+        vector < int > build(int(obstacles.size()) + 1, 1e9);
+        for (auto & i: obstacles){
+            // find the index of the smallest element that is greater than or equal to i
+            auto it = upper_bound(build.begin(), build.end(), i) - build.begin();
+            build[it] = i; // update the value of build[it]
+            ans.push_back(it + 1); // update the answer
+        }
+        return ans; // return the answer
+    }
+};
+```
+
