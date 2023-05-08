@@ -9,6 +9,7 @@
 1. **[Maximum Number of Vowels in a Substring of Given Length](#5--Maximum-Number-of-Vowels-in-a-Substring-of-Given-Length)**
 1. **[Number of Subsequences That Satisfy the Given Sum Condition](#6--Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition)**
 1. **[Find the Longest Valid Obstacle Course at Each Position](#7--Find-the-Longest-Valid-Obstacle-Course-at-Each-Position)**
+1. **[Matrix Diagonal Sum](#8--Matrix-Diagonal-Sum)**
 
 
 <hr>
@@ -270,3 +271,40 @@ public:
 };
 ```
 
+<hr><br>
+
+## 8)  [Matrix Diagonal Sum](https://leetcode.com/problems/matrix-diagonal-sum/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+`Array` `Matrix`
+
+### Code
+```cpp
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+       // the sum of the elements in the main diagonal and the secondary diagonal
+       long long sum = 0; 
+
+       // the size of the matrix
+       int n = mat[0].size();
+
+       // the sum of the elements in the main diagonal 
+       for (int i = 0; i < n; i++) sum += mat[i][i];
+
+        // the sum of the elements in the secondary diagonal       
+       for (int i = 0; i < n; i++)
+         for (int j = 0; j < n; j++)
+            if ((i + j) == n - 1 && i != j)
+               sum += mat[i][j];
+
+        // return the sum
+        return sum;        
+    }
+};
+```
