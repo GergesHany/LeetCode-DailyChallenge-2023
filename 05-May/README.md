@@ -136,7 +136,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -174,7 +175,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -211,7 +213,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -256,7 +259,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Hard}}}$**
+**${\bf{\color\{red}{Hard}}}$**
 
 ### Related Topic
 
@@ -325,7 +328,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
 
 
 ### Related Topic
@@ -383,7 +386,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -439,7 +443,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -495,7 +500,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 
 ### Related Topic
@@ -537,7 +543,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -583,7 +590,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Hard}}}$**
+**${\bf{\color\{red}{Hard}}}$**
 
 ### Related Topic
 
@@ -651,7 +658,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -704,7 +712,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -752,7 +761,8 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
+
 
 ### Related Topic
 
@@ -824,7 +834,7 @@ public:
 
 ### Difficulty
 
-**${\bf{\color\{green}{Medium}}}$**
+**${\bf{\color\{orange}{Medium}}}$**
 
 ### Related Topic
 
