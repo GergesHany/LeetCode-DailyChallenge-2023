@@ -1,6 +1,6 @@
 #!/bin/bash
-read -p "Enter the file name : " file_name 
-code "$file_name.cpp" 
+read -p "Enter the file name : " file_name
+code "$file_name.cpp"
 git add .
-git commit -m $file_name 
-git push 
+git commit -m "$file_name"
+git push
