@@ -1,3 +1,0 @@
-#!/bin/bash
-read -p "Enter the file name : " file_name
-code "$file_name.cpp"
