@@ -1128,7 +1128,7 @@ public:
 };
 ```
 
-## [Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
+## 23) [Kth Largest Element in a Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
 
 ### Difficulty
 
@@ -1175,7 +1175,7 @@ public:
 <hr> <br>
 
 
-## [Maximum Subsequence Score](https://leetcode.com/problems/maximum-subsequence-score/)
+## 24) [Maximum Subsequence Score](https://leetcode.com/problems/maximum-subsequence-score/)
 
 ### Difficulty
 
@@ -1233,7 +1233,7 @@ public:
 
 <hr> <br>
 
-## [New 21 Game](https://leetcode.com/problems/new-21-game/)
+## 25) [New 21 Game](https://leetcode.com/problems/new-21-game/)
 
 ### Difficulty
 
