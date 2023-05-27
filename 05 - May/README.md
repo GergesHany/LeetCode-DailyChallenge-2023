@@ -1285,7 +1285,12 @@ public:
 
 <hr> <br>
 
+<<<<<<< HEAD
 ## 26) [Stone Game II](https://leetcode.com/problems/stone-game-ii/)
+=======
+
+## 26)  [Stone Game II](https://leetcode.com/problems/stone-game-ii/)
+>>>>>>> 82799ec221e2a2d713f0f850743b861552b231e9
 
 ### Difficulty
 
