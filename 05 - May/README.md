@@ -1284,7 +1284,7 @@ public:
 <hr> <br>
 
 
-## [Stone Game II](https://leetcode.com/problems/stone-game-ii/)
+## 26)  [Stone Game II](https://leetcode.com/problems/stone-game-ii/)
 
 ### Difficulty
 
