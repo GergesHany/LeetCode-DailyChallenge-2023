@@ -1449,7 +1449,7 @@ public:
 <hr> <br>
 
 
-## 29) [Design Parking System](https://leetcode.com/problems/design-parking-system/)
+## 29)  [Design Parking System](https://leetcode.com/problems/design-parking-system/)
 
 ### Difficulty
 
