@@ -31,6 +31,7 @@
 1. **[Stone Game III](#27--Stone-Game-III)**
 1. **[Minimum Cost to Cut a Stick](#28--Minimum-Cost-to-Cut-a-Stick)**
 1. **[Design Parking System](#29--Design-Parking-System)**
+1. **[Design HashSet](#30--Design-HashSet)**
 
 <hr>
 
@@ -1497,6 +1498,57 @@ public:
  * Your ParkingSystem object will be instantiated and called as such:
  * ParkingSystem* obj = new ParkingSystem(big, medium, small);
  * bool param_1 = obj->addCar(carType);
+ */
+```
+
+<hr> <br>
+
+
+## 30)  [Design HashSet](https://leetcode.com/problems/design-hashset/)
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+
+### Related Topic
+
+`Design` `Hash Table` `Array`
+
+
+### Code
+
+```cpp
+class MyHashSet {
+public:
+    multiset < int > st; // The multiset is used to store the elements 
+    MyHashSet() {
+        
+    }
+    
+    void add(int key) {
+        // insert the element in the multiset
+        st.insert(key);
+    }
+    
+    void remove(int key) {
+        // if the element is present in the multiset then remove it
+        if (st.count(key))
+          st.erase(*st.find(key));
+    }
+    
+    bool contains(int key) {
+        // check if the element is present in the multiset
+        return st.count(key);
+    }
+};
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
  */
 ```
 
