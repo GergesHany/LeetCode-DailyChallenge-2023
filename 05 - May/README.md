@@ -1556,7 +1556,7 @@ public:
 <hr> <br>
 
 
-## 31) [Design Underground System](https://leetcode.com/problems/design-underground-system/)
+## 31)  [Design Underground System](https://leetcode.com/problems/design-underground-system/)
 
 ### Difficulty
 
