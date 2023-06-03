@@ -6,6 +6,7 @@
 
 1. **[Shortest Path in Binary Matrix](#1-shortest-path-in-binary-matrix)**
 1. **[Detonate the Maximum Bombs](#2-detonate-the-maximum-bombs)**
+1. **[Time Needed to Inform All Employees](#3-time-needed-to-inform-all-employees)**
 
 <hr>
 
@@ -180,6 +181,76 @@ public:
 <br><hr>
 
 
+## 3) [Time Needed to Inform All Employees](https://leetcode.com/problems/time-needed-to-inform-all-employees/)
+
+### Difficulty
+
+**${\bf{\color\{orange}{Medium}}}$**
+
+### Related Topic
+
+**[Tree](https://leetcode.com/tag/tree/)** , **[Depth-first Search](https://leetcode.com/tag/depth-first-search/)** , **[Breadth-first Search](https://leetcode.com/tag/breadth-first-search/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+
+    int curr = 0, ans = 0; // curr is the current time taken to inform all the subordinates of a manager
+    
+    // dfs to find the maximum time taken to inform all the subordinates of a manager
+    void dfs(vector < int > adj[], vector < int >& informTime, int src){
+        // if the manager has no subordinates, then update the ans 
+        if(adj[src].size() == 0){
+            ans = max(ans, curr);
+            return ;
+        }
+        // else, update the current time taken to inform all the subordinates of the manager
+        curr += informTime[src];
+        // call dfs for all the subordinates of the manager
+        for(auto it : adj[src])
+            dfs(adj, informTime, it);
+        // backtrack    
+        curr -= informTime[src];
+    }
+
+    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+        vector < int > adj[n]; // adjacency list to store the subordinates of a manager
+
+        // create the adjacency list
+        for(int i = 0; i < n; i++)
+            if(~manager[i])
+                adj[manager[i]].push_back(i);
+        // call dfs for the headID
+        dfs(adj, informTime, headID);
+
+        // return the ans
+        return ans;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N)**
+
+### Space Complexity
+
+**O(N)**
+
+### Useful Links
+
+[![Link](http://img.youtube.com/vi/0XgVhsMOcQM/0.jpg)](http://www.youtube.com/watch?v=0XgVhsMOcQM "")
+
+### Similar Problems
+
+- [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+- [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+
+
+<br><hr>
 
 
 
