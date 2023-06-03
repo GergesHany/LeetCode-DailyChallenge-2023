@@ -79,9 +79,7 @@ public:
 
 **O(N * M)**
 
-### Useful Links
-
-[![Link](http://img.youtube.com/vi/0XgVhsMOcQM/0.jpg)](http://www.youtube.com/watch?v=0XgVhsMOcQM "")
+### [![Useful Links](http://img.youtube.com/vi/0XgVhsMOcQM/0.jpg)](http://www.youtube.com/watch?v=0XgVhsMOcQM "")
 
 ### Similar Problems
 
