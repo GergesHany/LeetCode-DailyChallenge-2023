@@ -7,6 +7,7 @@
 1. **[Shortest Path in Binary Matrix](#1-shortest-path-in-binary-matrix)**
 1. **[Detonate the Maximum Bombs](#2-detonate-the-maximum-bombs)**
 1. **[Time Needed to Inform All Employees](#3-time-needed-to-inform-all-employees)**
+1. **[Number of Provinces](#4-number-of-provinces)**
 
 <hr>
 
@@ -252,6 +253,89 @@ public:
 
 <br><hr>
 
+
+
+## 4) [Number of Provinces](https://leetcode.com/problems/number-of-provinces/)
+
+
+### Difficulty
+
+**${\bf{\color\{orange}{Medium}}}$**
+
+### Related Topic
+
+**[Graph](https://leetcode.com/tag/graph/)** , **[Depth-first Search](https://leetcode.com/tag/depth-first-search/)** , **[Breadth-first Search](https://leetcode.com/tag/breadth-first-search/)** , **[Union Find](https://leetcode.com/tag/union-find/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    const int N = 205; // max number of nodes
+    vector < bool > vis; // visited array
+    vector < int > adj[205]; // adjacency list
+
+    // dfs function to visit all nodes in a connected component 
+    void dfs(int node){
+        vis[node] = true;
+        for (auto & child: adj[node]){
+            if (!vis[child]){
+                dfs(child);
+            }
+        }
+    
+    }
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+      int ans = 0; // number of connected components
+      vis = vector < bool > (N); // visited array
+      int n = isConnected.size(); // number of nodes
+
+    //  building adjacency list
+      for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+          if (isConnected[i][j] == 1)
+            adj[i].push_back(j);
+
+      // dfs to count number of connected components
+      for (int i = 0; i < n; i++){
+        if (!vis[i]){
+          dfs(i);
+          ans++;
+        }
+      }
+
+      return ans;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N + M)**
+
+### Space Complexity
+
+**O(N * N)**
+
+
+### Useful Links
+
+[![Link](http://img.youtube.com/vi/0XgVhsMOcQM/0.jpg)](http://www.youtube.com/watch?v=0XgVhsMOcQM "")
+
+### Similar Problems
+
+
+- [Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
+
+- [Robot Return to Origin](https://leetcode.com/problems/robot-return-to-origin/)
+
+- [Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/)
+
+
+
+<br><hr>
 
 
 
