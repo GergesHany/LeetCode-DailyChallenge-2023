@@ -8,6 +8,7 @@
 1. **[Detonate the Maximum Bombs](#2-detonate-the-maximum-bombs)**
 1. **[Time Needed to Inform All Employees](#3-time-needed-to-inform-all-employees)**
 1. **[Number of Provinces](#4-number-of-provinces)**
+1. **[Check If It Is a Straight Line](#5-check-if-it-is-a-straight-line)**
 
 <hr>
 
@@ -338,4 +339,60 @@ public:
 <br><hr>
 
 
+## 5) [Check If It Is a Straight Line](https://leetcode.com/problems/check-if-it-is-a-straight-line/)
 
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+**[Math](https://leetcode.com/tag/math/)** , **[Geometry](https://leetcode.com/tag/geometry/)** , **[Array](https://leetcode.com/tag/array/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        int n = int(coordinates.size()); // size of coordinates
+
+        // if there are only 2 points, return true
+        if (n == 2) return true;
+
+        // if there are more than 2 points, check if they are on the same line 
+
+        // check if the slope of the first 2 points are the same with the rest of the points 
+        int x1 = coordinates[0][0], y1 = coordinates[0][1];
+        int x2 = coordinates[1][0], y2 = coordinates[1][1];
+        
+        // if the slope of the first 2 points are the same with the rest of the points, return true
+        for (int i = 2; i < n; ++i){
+            int x3 = coordinates[i][0], y3 = coordinates[i][1];
+            if ((y2 - y1) * (x3 - x2) != (y3 - y2) * (x2 - x1)) return false;
+        }
+        
+        // if the slope of the first 2 points are not the same with the rest of the points, return false
+        return true;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N)**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://www.youtube.com/watch?v=R948Tsyq4vA)](https://www.youtube.com/watch?v=R948Tsyq4vA "")
+
+
+
+<br><hr>
