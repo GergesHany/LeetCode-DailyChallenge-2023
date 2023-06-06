@@ -9,6 +9,8 @@
 1. **[Time Needed to Inform All Employees](#3-time-needed-to-inform-all-employees)**
 1. **[Number of Provinces](#4-number-of-provinces)**
 1. **[Check If It Is a Straight Line](#5-check-if-it-is-a-straight-line)**
+1. **[Can Make Arithmetic Progression From Sequence](#6-can-make-arithmetic-progression-from-sequence)**
+
 
 <hr>
 
@@ -396,3 +398,61 @@ public:
 
 
 <br><hr>
+
+
+## 6)  [Can Make Arithmetic Progression From Sequence](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/)
+
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+**[Array](https://leetcode.com/tag/array/)** , **[Sorting](https://leetcode.com/tag/sorting/)** , **[Math](https://leetcode.com/tag/math/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    bool canMakeArithmeticProgression(vector<int>& arr) {
+        // sort the array
+        sort(arr.begin(), arr.end()); 
+        
+        // check if the difference between first two elements is same as the difference between the next two elements
+        for (int i = 1; i < int(arr.size()); i++)
+           // if the difference is not same, return false
+            if ((arr[i] - arr[i - 1]) != (arr[1] - arr[0]))
+               return false;
+        // if the difference is same, return true
+        return true;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N log N)**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://www.youtube.com/watch?v=MOaSXYGas0I)](https://www.youtube.com/watch?v=MOaSXYGas0I "")
+
+
+### Similar Problems
+
+- [Arithmetic Subarrays](https://leetcode.com/problems/arithmetic-subarrays/)
+
+<br><hr>
+
+
+
+
+
