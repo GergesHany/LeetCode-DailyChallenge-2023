@@ -400,7 +400,7 @@ public:
 <br><hr>
 
 
-## 6)  [Can Make Arithmetic Progression From Sequence](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/)
+## 6) [Can Make Arithmetic Progression From Sequence](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/)
 
 
 ### Difficulty
