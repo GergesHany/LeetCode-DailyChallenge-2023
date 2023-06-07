@@ -10,6 +10,7 @@
 1. **[Number of Provinces](#4-number-of-provinces)**
 1. **[Check If It Is a Straight Line](#5-check-if-it-is-a-straight-line)**
 1. **[Can Make Arithmetic Progression From Sequence](#6-can-make-arithmetic-progression-from-sequence)**
+1. **[Minimum Flips to Make a OR b Equal to c](#7-minimum-flips-to-make-a-or-b-equal-to-c)**
 
 
 <hr>
@@ -453,6 +454,63 @@ public:
 <br><hr>
 
 
+## 7) [Minimum Flips to Make a OR b Equal to c](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/)
+
+
+### Difficulty
+
+**${\bf{\color\{orange}{Medium}}}$**
+
+### Related Topic
+
+**[Bit Manipulation](https://leetcode.com/tag/bit-manipulation/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int minFlips(int a, int b, int c) {
+      int ans = 0; // the number of flips
+
+      // convert to binary representation using bitset
+      bitset < 32 > A(a), B(b), C(c);
+      
+      for (int i = 0; i < 32; i++){
+        // check if the ith bit of c is different from the ith bit of a or b
+        if ((A[i] | B[i]) != C[i]){
+          // if the ith bit of c is 0, we need to flip both a and b  
+          if (C[i] == 0) ans += (A[i] + B[i]);
+          // if the ith bit of c is 1, we need to flip either a or b
+          else ans++;
+        }
+      }
+      // return the number of flips
+      return ans;
+    }
+};
+```
+
+### Time Complexity
+
+**O(1)**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://www.youtube.com/watch?v=taov2H_-nlU)](https://www.youtube.com/watch?v=taov2H_-nlU "")
+
+
+### Similar Problems
+
+- [Minimum Bit Flips to Convert Number](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/) 
+
+<br><hr>
 
 
 
