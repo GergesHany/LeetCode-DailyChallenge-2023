@@ -12,6 +12,8 @@
 1. **[Can Make Arithmetic Progression From Sequence](#6-can-make-arithmetic-progression-from-sequence)**
 1. **[Minimum Flips to Make a OR b Equal to c](#7-minimum-flips-to-make-a-or-b-equal-to-c)**
 1. **[Count Negative Numbers in a Sorted Matrix](#8-count-negative-numbers-in-a-sorted-matrix)**
+1. **[Find Smallest Letter Greater Than Target](#9-find-smallest-letter-greater-than-target)**
+
 
 
 <hr>
@@ -564,3 +566,50 @@ public:
 
 <br><hr>
 
+## 9) [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/)
+
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+**[Array](https://leetcode.com/tag/array/)** , **[Binary Search](https://leetcode.com/tag/binary-search/)** 
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        char ans = 'A'; // The answer is initialized to 'A' because it is the smallest letter
+        // If the letter is greater than the target, then it is the answer 
+        for (auto & i: letters) if (i > target && ans == 'A') ans = i;
+        // If the answer is still 'A', then the answer is the first letter in the vector , otherwise it is the answer
+        return ans == 'A' ? letters[0] : ans;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N)**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://www.youtube.com/watch?v=AMnultLTdlI)](https://www.youtube.com/watch?v=AMnultLTdlI "")
+
+
+### Similar Problems
+
+- [Count Elements With Strictly Smaller and Greater Elements](https://leetcode.com/problems/count-elements-with-strictly-smaller-and-greater-elements/)
+
+
+<br><hr>
