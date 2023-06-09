@@ -11,6 +11,7 @@
 1. **[Check If It Is a Straight Line](#5-check-if-it-is-a-straight-line)**
 1. **[Can Make Arithmetic Progression From Sequence](#6-can-make-arithmetic-progression-from-sequence)**
 1. **[Minimum Flips to Make a OR b Equal to c](#7-minimum-flips-to-make-a-or-b-equal-to-c)**
+1. **[Count Negative Numbers in a Sorted Matrix](#8-count-negative-numbers-in-a-sorted-matrix)**
 
 
 <hr>
@@ -513,4 +514,53 @@ public:
 <br><hr>
 
 
+
+## 8) [Count Negative Numbers in a Sorted Matrix](https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/)
+
+
+### Difficulty
+
+**${\bf{\color\{green}{Easy}}}$**
+
+### Related Topic
+
+**[Array](https://leetcode.com/tag/array/)** , **[Binary Search](https://leetcode.com/tag/binary-search/)** , **[Matrix](https://leetcode.com/tag/matrix/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        int ans = 0; // count of negative numbers
+        for (auto & i: grid) 
+        // for each row, count the number of negative numbers in it and add to ans 
+          ans += count_if(i.begin(), i.end(), [](int x){ return x < 0; });
+        // return the answer  
+        return ans;
+    }
+};
+```
+
+### Time Complexity
+
+**O(N * N)**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://www.youtube.com/watch?v=5h1QYF6aQZM)](https://www.youtube.com/watch?v=5h1QYF6aQZM "")
+
+
+### Similar Problems
+
+- [Maximum Count of Positive Integer and Negative Integer](https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/)
+
+
+<br><hr>
 
