@@ -13,6 +13,7 @@
 1. **[Minimum Flips to Make a OR b Equal to c](#7-minimum-flips-to-make-a-or-b-equal-to-c)**
 1. **[Count Negative Numbers in a Sorted Matrix](#8-count-negative-numbers-in-a-sorted-matrix)**
 1. **[Find Smallest Letter Greater Than Target](#9-find-smallest-letter-greater-than-target)**
+1. **[Maximum Value at a Given Index in a Bounded Array](#10-maximum-value-at-a-given-index-in-a-bounded-array)**
 
 
 
@@ -613,3 +614,90 @@ public:
 
 
 <br><hr>
+
+
+## 10) [Maximum Value at a Given Index in a Bounded Array](https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/)
+
+
+### Difficulty
+
+**${\bf{\color\{orange}{Medium}}}$**
+
+
+### Related Topic
+
+**[Binary Search](https://leetcode.com/tag/binary-search/)** , **[Math](https://leetcode.com/tag/math/)**
+
+
+### Code
+
+```cpp
+class Solution {
+public:      
+    int maxValue(int n, int index, int maxSum) {
+
+        // function to calculate sum of first n natural numbers 
+        auto SUM = [](long long mid) -> long long {
+           return 1LL * mid * (mid + 1) / 2;
+        }; 
+
+        // function to check if mid is a good value
+        auto is_good = [&](int mid){
+            long long sum = 0; // sum of all elements
+            long long reqLeft = mid, haveLeft = index + 1; // reqLeft = required left elements, haveLeft = have left elements
+
+            if (index == 0) sum += mid; // if index is 0, then we have to add mid to sum
+            else{
+                // if we have more elements than required, then we can add sum of first reqLeft elements to sum and add remaining elements to sum 
+                if (haveLeft >= reqLeft)
+                  sum += SUM(mid), sum += haveLeft - reqLeft;
+                // if we have less elements than required, then we can add sum of first reqLeft elements to sum and add remaining elements to sum 
+                else sum += SUM(mid) - SUM(reqLeft - haveLeft);
+            }
+
+            // same as above, but for right side elements 
+            if (index != n - 1){
+                // if we have more elements than required, then we can add sum of first reqRight elements to sum and add remaining elements to sum
+                long long reqRight = reqLeft - 1;
+                long long haveRight = n - index - 1;
+                // if we have more elements than required, then we can add sum of first reqRight elements to sum and add remaining elements to sum
+                if (haveRight >= reqRight)
+                    sum += SUM(mid - 1), sum += haveRight - reqRight;
+                // if we have less elements than required, then we can add sum of first reqRight elements to sum and add remaining elements to sum    
+                else sum += SUM(mid - 1) - SUM(reqRight - haveRight);
+            }
+            // return true if sum is less than or equal to maxSum
+            return sum <= maxSum;
+        };
+
+      // binary search for the answer 
+      int l = 1, r = maxSum, ans = 0;
+      while (l <= r){
+        int mid = (l + r) >> 1;
+        if (is_good(mid)) ans = mid, l = mid + 1;
+        else r = mid - 1;
+      }
+
+      // return answer
+      return ans;
+    }
+};
+
+```
+
+### Time Complexity
+
+**O(log(maxSum))**
+
+### Space Complexity
+
+**O(1)**
+
+
+### Useful Links
+
+[![Link](https://en.wikipedia.org/wiki/Summation)](https://en.wikipedia.org/wiki/Summation "")
+
+
+<br><hr>
+
